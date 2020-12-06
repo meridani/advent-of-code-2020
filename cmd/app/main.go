@@ -15,11 +15,11 @@ var currentDay = 1
 
 func init() {
 	for i := 1; i <= currentDay; i++ {
-		listOfDays[i] = "./assets/" + string(i) + ".txt"
+		listOfDays[i] = fmt.Sprintf("./assets/inputs/%x.txt", i)
 	}
 }
 
-func readInput(fileName string) (result []string) {
+func readInput(fileName string) (result days.Input) {
 	file, err := os.Open(fileName)
 	if err != nil {
 		log.Println("Cannot open: ", fileName)
@@ -43,5 +43,9 @@ func main() {
 		fmt.Println("Reading Day ", day, " input...")
 		input := readInput(filename)
 		today := &day1.Computer{}
+		result := today.Part1(input)
+		fmt.Println(result)
+		result = today.Part2(input)
+		fmt.Println(result)
 	}
 }
